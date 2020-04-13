@@ -1,0 +1,7 @@
+/transformers
+/data/all
+/data/gpt2_cached*
+/data/clean
+/runs
+[._]sw[a-p]
+[._]*.sw[a-p]
