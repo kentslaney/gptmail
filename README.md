@@ -9,7 +9,7 @@ $ bash train.sh
 ```
 which will output the fine-tuned weights to the `weights` directory. Running the model requires a `length` parameter (1000 here), and a `prompt`:
 ```
-$ bash run.sh 1000 "This snow report is brought to you by GPT-2.0."
+$ bash run.sh 1000 "This snow report is brought to you by GPT-2."
 ```
 Leaving out the prompt argument will prompt for an input in the CLI.
 
