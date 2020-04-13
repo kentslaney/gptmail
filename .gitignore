@@ -3,5 +3,6 @@
 /data/gpt2_cached*
 /data/clean
 /runs
+/weights
 [._]sw[a-p]
 [._]*.sw[a-p]
