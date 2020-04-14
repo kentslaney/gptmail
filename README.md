@@ -60,9 +60,16 @@ This will output the fine-tuned weights to the `weights` directory. Leaving out 
 ### Downloading Weights
 Instead of training your own model, you can also download weights that someone else has created. You can do this by downloading the file, unzipping the archive (`tar xf archive.tar.gz`), and make sure that the unzipped folder is called `weights` in the base directory.
 
-Some pretrained models based on sources of potential interest:
+Some pretrained models based on sources of potential interest and how they were made:
 - [MIT XC snow reports](https://slaney.org/~kent/snowreports.tar.gz)
-- emails of the famed Halston W Taylor coming soon
+  - Manual `.eml` download from gmail
+  - `python data/cleanup.py`
+  - `bash train.sh 10`
+- emails of the famed Halston W Taylor (weights download coming soon)
+  - `python data/gmail.py "from:hwtaylor@mit.edu to:(cross-country@mit.edu OR track-field@mit.edu)"`
+  - `python data/examples/hwtaylor/articles.py`
+  - `python data/cleanup.py data.examples.hwtaylor.cleanup.signature data.cleanup.append`
+  - `bash train.sh 10`
 
 ## Running the Model
 Running the model based on `weights` requires a `length` parameter (1000 here), and a `prompt`:
