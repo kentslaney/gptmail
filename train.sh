@@ -3,7 +3,6 @@ cd "$(dirname "$0")"
 bash setup.sh
 
 # clean data
-python data/cleanup.py
 cat data/clean/* | tr -d '\r' > data/all
 
 # train gpt2
@@ -15,4 +14,4 @@ python transformers/examples/run_language_modeling.py \
 	--do_train \
 	--train_data_file=data/all \
 	--save_steps 5000 \
-	--num_train_epochs=10
+	--num_train_epochs="${1-10}"

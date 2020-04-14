@@ -1,8 +1,29 @@
 /transformers
+/data/raw
+/data/add
+/data/clean
 /data/all
 /data/gpt2_cached*
-/data/clean
+/data/credentials.json
+/data/token.pickle
 /runs
 /weights
+
+# vim
 [._]sw[a-p]
 [._]*.sw[a-p]
+
+# python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+__pypackages__/
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
