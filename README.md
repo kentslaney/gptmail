@@ -65,7 +65,7 @@ Some pretrained models based on sources of potential interest and how they were 
   - Manual `.eml` download from gmail
   - `python data/cleanup.py`
   - `bash train.sh 10`
-- emails of the famed Halston W Taylor (weights download coming soon)
+- [emails of the famed Halston Taylor](https://slaney.org/~kent/hwtaylor.tar.gz)
   - `python data/gmail.py "from:hwtaylor@mit.edu to:(cross-country@mit.edu OR track-field@mit.edu)"`
   - `python data/examples/hwtaylor/articles.py`
   - `python data/cleanup.py data.examples.hwtaylor.cleanup.signature data.cleanup.append`
