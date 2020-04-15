@@ -72,9 +72,18 @@ Some pretrained models based on sources of potential interest and how they were 
   - `bash train.sh 10`
 
 ## Running the Model
+### In the Command Line
 Running the model based on `weights/default` requires a `length` parameter (1000 here), and a `prompt`:
 ```
 $ bash run.sh 1000 weights/default "This snow report is brought to you by GPT-2."
 ```
 
 Leaving out the prompt argument will prompt for an input in the CLI.
+
+### Using the web GUI
+To serve the web GUI at [http://localhost:8000](http://localhost:8000), simply run
+```
+python server.py
+```
+
+This will serve all the models in the `weights` directory, and picks default prompts at random from `gui/default_prompts`.
