@@ -8,6 +8,7 @@
 /data/token.pickle
 /runs
 /weights
+/cache
 
 # vim
 [._]sw[a-p]

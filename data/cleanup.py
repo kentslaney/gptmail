@@ -22,8 +22,11 @@ def append():
     parser.add_argument("--append", nargs='+', default=(relpath("add"),))
     args, _ = parser.parse_known_args()
 
-    return [(fname, open(os.path.join(append, fname), "rb").read())
-        for append in args.append for fname in os.listdir(append)]
+    res = []
+    for append in args.append for fname in os.listdir(append)
+        with open(os.path.join(append, fname), "rb") as fp:
+            res.append((fname, fp.read()))
+    return res
 
 if __name__ == "__main__":
     import shutil, glob, importlib, inspect
@@ -61,4 +64,5 @@ if __name__ == "__main__":
         for fname, res in gen():
             for _, pipe in pipeline(stages[i:], True):
                 res = pipe(res)
-            open(os.path.join(args.output, fname), "wb+").write(res)
+            with open(os.path.join(args.output, fname), "wb+") as fp:
+                fp.write(res)

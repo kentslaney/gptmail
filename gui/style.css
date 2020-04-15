@@ -1,0 +1,255 @@
+body {
+  margin: 0px;
+  font-family: Helvetica;
+}
+
+#input-container {
+	position: absolute;
+	width: 100%;
+	top: 3rem;
+	bottom: 0px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  overflow-y: auto;
+  border-top: 1px solid #ccc;
+}
+
+#input {
+  border: 0px;
+  outline: 0px;
+  width: 100%;
+  height: 100%;
+  resize: none;
+  font: inherit;
+  padding: 1rem;
+  background: transparent;
+}
+
+#input:placeholder-shown {
+  font-weight: normal;
+}
+
+#autocomplete-wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: -1;
+  padding: 1rem;
+  white-space: pre-wrap;
+}
+
+#autocomplete-prompt {
+	visibility: hidden;
+}
+
+#autocomplete {
+	font-weight: normal;
+}
+
+#header-right {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+	margin: 0 1rem;
+  white-space: nowrap;
+}
+
+#run {
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  background: #42A5F5;
+  border: 1px solid #ccc;
+  color: #333;
+  display: inline;
+  position: relative;
+}
+
+#run:not(.loading):not(.disabled) {
+  cursor: pointer;
+}
+
+#run.loading, #run.disabled {
+	cursor: default;
+}
+
+#run:hover:not(.loading):not(.disabled) {
+  background: #2196F3;
+  border-color: #aaa;
+}
+
+.loading > #run-text {
+  visibility: hidden;
+}
+
+#run-loading > span {
+  width: 0.8rem;
+  height: 0.8rem;
+  display: inline-block;
+  margin: 0 0.15rem;
+  border-radius: 100%;
+  background: #333;
+  animation-name: load;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  transform: scale(0);
+}
+
+#run:not(.loading) > #run-loading {
+  display: none;
+}
+
+#run-loading {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  white-space: nowrap;
+  text-align: center;
+  height: 0;
+  top: 50%;
+  margin-top: -0.4rem;
+}
+
+.loading > #run-loading > span:nth-child(2) { animation-delay: 0.3s; }
+.loading > #run-loading > span:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes load {
+    0% { transform: scale(0); }
+   50% { transform: scale(1); }
+  100% { transform: scale(0); }
+}
+
+#header {
+	height: 3rem;
+	position: relative;
+}
+
+#run.disabled {
+  color: #666;
+  background: #64B5F6;
+}
+
+#length {
+  margin-left: 0.3rem;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+  color: #333;
+  width: 4rem;
+  text-align: center;
+  outline: 0px;
+}
+
+#length:focus {
+  border-color: #aaa;
+}
+
+#length.invalid {
+	border-color: #e57373;
+}
+
+#header-left::before {
+	content: "Model: "
+}
+
+#header-left {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 1rem;
+  font-size: 1rem;
+}
+
+#header-left > input[type=radio] {
+  display: none;
+}
+
+#header-left > label {
+  padding: 0.5rem;
+  margin: 0 0.2rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+#header-left > label:hover {
+  border: 1px solid #aaa;
+}
+
+#header-left > input[type=radio]:checked + label {
+  cursor: default;
+	background: #42A5F5;
+  border: 1px solid #aaa;
+}
+
+#expand_menu, #expand_menu + label {
+	display: none;
+}
+
+body.mobile > #header > #expand_menu + label {
+  display: inline-block;
+  position: absolute;
+  z-index: 1;
+  height: 3rem;
+  padding-left: 1rem;
+}
+
+body.mobile > #header > #expand_menu + label > span {
+  line-height: 3rem;
+}
+
+body.mobile > #header > #expand_menu + label::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0);
+  visibility: hidden;
+  transition: visibility 0s linear 0.2s, background 0.2s;
+}
+
+body.mobile > #header > #expand_menu:checked + label::before {
+  background: rgba(0, 0, 0, 0.6);
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+body.mobile > #header > #header-left {
+  margin: 0;
+  position: fixed;
+  width: 18rem;
+  background: white;
+  height: 100%;
+  transform: translateX(-100%);
+  z-index: 2;
+  top: 0;
+}
+
+body.mobile.postload > #header > #header-left {
+  transition: transform 0.2s;
+}
+
+body.mobile > #header > #expand_menu:checked + label + #header-left {
+  transform: translateX(0%);
+}
+
+body.mobile #header-left::before {
+    display: block;
+    padding: 1rem 0.5rem;
+    border-bottom: 1px solid #ccc;
+    color: #555;
+}
+
+body.mobile #header-left > label {
+    display: block;
+    margin: 0;
+    border-radius: 0;
+    border-width: 0 0 1 0 !important;
+}

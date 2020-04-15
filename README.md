@@ -1,5 +1,5 @@
 # GPTMail
-Want to automate a friend? Just download their emails, and let GPT-2 do the rest!
+Want to automate a friend? Just download their emails and let GPT-2 do the rest!
 
 This repository just deals with downloading and cleaning the data. [huggingface/transformers](https://github.com/huggingface/transformers) does all of the real work.
 
@@ -9,7 +9,7 @@ If you just want to download weights and run the model, skip to [Downloading Wei
 ### Manually, Individually
 By default, this repo assumes that the raw data consists of `.eml` files in `data/raw`. You can download `.eml` files from a number of email clients, but gmail, as an example lets you download individual messages with the "Download message" dropdown option next to the reply button.
 
-### Manually, as a Group
+### Manually as a Group
 Some email clients also allow you to download large numbers of emails as a group using `.mbox` files. For gmail, this can be done using [Google Takeout](https://takeout.google.com). To expand a `.mbox` file into `.eml` files in `data/raw`, run the command
 ```
 $ bash data/mbox.sh path/to/file.eml
@@ -55,10 +55,10 @@ To train a model based on the data in `data/clean` for a given number of epochs 
 $ bash train.sh 10
 ```
 
-This will output the fine-tuned weights to the `weights` directory. Leaving out the number of epochs will cause it to default to 10.
+This will output the fine-tuned weights to the `weights/default` directory. Leaving out the number of epochs will cause it to default to 10.
 
 ### Downloading Weights
-Instead of training your own model, you can also download weights that someone else has created. You can do this by downloading the file, unzipping the archive (`tar xf archive.tar.gz`), and make sure that the unzipped folder is called `weights` in the base directory.
+Instead of training your own model, you can also download weights that someone else has created. You can do this by downloading the file, unzipping the archive (`tar xf archive.tar.gz`), and make sure that the unzipped folder is called `weights/default` in the base directory.
 
 Some pretrained models based on sources of potential interest and how they were made:
 - [MIT XC snow reports](https://slaney.org/~kent/snowreports.tar.gz)
@@ -72,9 +72,9 @@ Some pretrained models based on sources of potential interest and how they were 
   - `bash train.sh 10`
 
 ## Running the Model
-Running the model based on `weights` requires a `length` parameter (1000 here), and a `prompt`:
+Running the model based on `weights/default` requires a `length` parameter (1000 here), and a `prompt`:
 ```
-$ bash run.sh 1000 "This snow report is brought to you by GPT-2."
+$ bash run.sh 1000 weights/default "This snow report is brought to you by GPT-2."
 ```
 
 Leaving out the prompt argument will prompt for an input in the CLI.

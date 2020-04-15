@@ -39,5 +39,5 @@ if __name__ == "__main__":
 
     urls = sum((scrape_index(i) for i in index_urls), [])
     for i, (url, article_type) in enumerate(tqdm(urls)):
-        open(os.path.join(args.output, "article{}".format(i)), "w+").write(
-            scrape_article(url, article_type))
+        with open(os.path.join(args.output, "article{}".format(i)), "w+") as fp:
+            fp.write(scrape_article(url, article_type))

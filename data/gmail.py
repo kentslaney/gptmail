@@ -57,8 +57,8 @@ def get(service, msg_id, user_id="me", output="raw"):
 
 def download(service, query, user_id="me", output="raw", offset=0):
     for res in tqdm(search(service, query, user_id)[offset:]):
-        open(os.path.join(output, res["id"] + ".eml"), "wb+").write(
-            get(service, res["id"], user_id))
+        with open(os.path.join(output, res["id"] + ".eml"), "wb+") as fp:
+            fp.write(get(service, res["id"], user_id))
 
 if __name__ == "__main__":
     import argparse

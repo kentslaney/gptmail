@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="params">/*{{ params|tojson }}*/</script>
+		<script type="text/javascript" src="gui/utils.js"></script>
+		<link rel="stylesheet" type="text/css" href="gui/style.css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	</head>
+	<body>
+		<div id="header">
+			<input type="checkbox" id="expand_menu" />
+			<label for="expand_menu"><span class="material-icons">menu</span></label>
+			<div id="header-left"></div>
+			<div id="header-right">
+				<div id="run">
+					<span id="run-text">Autocomplete</span>
+					<span id="run-loading"><span></span><span></span><span></span></span>
+				</div>
+				<input id="length" type="text"></input>
+				words
+			</div>
+		</div>
+		<div id="input-container">
+			<textarea id="input" placeholder="Enter the prompt you want autocompleted here..."></textarea>
+			<div id="autocomplete-wrapper"><span id="autocomplete-prompt"></span><span id="autocomplete"></span></div>
+		</div>
+	</body>
+</html>
