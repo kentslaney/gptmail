@@ -3,7 +3,7 @@ Want to automate a friend? Just download their emails and let GPT-2 do the rest!
 
 This repository just deals with downloading and cleaning the data. [huggingface/transformers](https://github.com/huggingface/transformers) does all of the real work.
 
-If you just want to download weights and run the model, skip to [Downloading Weights](#downloading-weights) and [Running the Model](#running-the-model).
+If you just want to download weights and run the model, skip to [Downloading Weights](#downloading-weights) and [Using the Web GUI](#using-the-web-gui).
 
 ## Downloading Data
 ### Manually, Individually
@@ -80,8 +80,13 @@ $ bash run.sh 1000 weights/default "This snow report is brought to you by GPT-2.
 
 Leaving out the prompt argument will prompt for an input in the CLI.
 
-### Using the web GUI
-To serve the web GUI at [http://localhost:8000](http://localhost:8000), simply run
+### Using the Web GUI
+Make sure you have all the necessary package requirements by running
+```
+$ bash setup.sh
+```
+
+Then, to serve the web GUI at [http://localhost:8000](http://localhost:8000), simply run
 ```
 python server.py
 ```
