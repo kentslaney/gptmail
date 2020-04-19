@@ -74,6 +74,7 @@ function update_state(clear, replace, push) {
 			state.prompt = input.prompt.value;
 			if(!output.cancelled.flag) {
 				output.cancelled.flag = true;
+				input.run.classList.remove("loading");
 			}
 
 			if(state.output && state.output.length) {
@@ -82,7 +83,7 @@ function update_state(clear, replace, push) {
 				toreplace = false;
 			}
 
-			populate()
+			populate();
 		}
 		let loc = state.model + "#" + to_uid(state.model, state.prompt,
 			state.length, state.sequences, state.seed);
@@ -100,9 +101,9 @@ function populate() {
 	output.prompt.textContent = state.prompt;
 	output.completion.textContent = state.output;
 	if(state.output && state.output.length) {
-		input.run.classList.add("disabled")
+		input.run.classList.add("disabled");
 	} else {
-		input.run.classList.remove("disabled")
+		input.run.classList.remove("disabled");
 		output.completion.innerHTML += "&nbsp;";
 	}
 }
@@ -111,17 +112,17 @@ function resize() {
 	input.prompt.style.minHeight = output.wrapper.clientHeight;
 
 	if(input.header_right.getBoundingClientRect().left < input.mobile_left_bound) {
-		document.body.classList.add("mobile")
-		window.setTimeout(() => document.body.classList.add("mobile-postload"), 0)
+		document.body.classList.add("mobile");
+		window.setTimeout(() => document.body.classList.add("mobile-postload"), 0);
 	} else {
-		document.body.classList.remove("mobile", "mobile-postload")
-		input.expand_menu.checked = false
+		document.body.classList.remove("mobile", "mobile-postload");
+		input.expand_menu.checked = false;
 	}
 
 	if(input.intro_autocomplete.getBoundingClientRect().left < input.intro_left_bound) {
-		document.body.classList.add("narrow")
+		document.body.classList.add("narrow");
 	} else {
-		document.body.classList.remove("narrow")
+		document.body.classList.remove("narrow");
 	}
 }
 
@@ -129,41 +130,41 @@ function run() {
 	if(!state.output || !state.output.length) {
 		let query = state.prompt, cancelled = {"flag": false};
 		output.cancelled = cancelled;
-		input.run.classList.add("loading")
+		input.run.classList.add("loading");
 		predict(state.model, query, state.length, state.sequences, state.seed)
 			.then((completion) => {
 				if(!cancelled.flag) {
-					input.run.classList.remove("loading")
-					input.run.classList.add("disabled")
+					input.run.classList.remove("loading");
+					input.run.classList.add("disabled");
 					state.output = completion[0].slice(query.length);
 					output.completion.textContent = state.output;
-					update_state(false, true, false)()
+					update_state(false, true, false)();
 				}
 			}).catch(() => {
 				if(!cancelled.flag) {
-					input.run.classList.remove("loading")
-					alert("Unable to connect to the server, please try again")
+					input.run.classList.remove("loading");
+					alert("Unable to connect to the server, please try again");
 				}
 			});
 	}
 }
 
 function intro() {
-	document.body.classList.add("intro")
-	window.setTimeout(() => document.body.classList.add("intro-postload"), 0)
+	document.body.classList.add("intro");
+	window.setTimeout(() => document.body.classList.add("intro-postload"), 0);
 }
 
 function intro_done() {
-	document.body.classList.remove("intro", "intro-postload", "intro-stage-1", "intro-stage-2")
-	window.localStorage["intro-done"] = true
+	document.body.classList.remove("intro", "intro-postload", "intro-stage-1", "intro-stage-2");
+	window.localStorage["intro-done"] = true;
 }
 
 window.addEventListener("load", () => {
-	input.prompt = document.getElementById("input")
+	input.prompt = document.getElementById("input");
 	input.prompt.addEventListener("input", update_state(true, true, false));
-	input.run = document.getElementById("run")
-	input.run.addEventListener("click", run)
-	input.length = document.getElementById("length")
+	input.run = document.getElementById("run");
+	input.run.addEventListener("click", run);
+	input.length = document.getElementById("length");
 	input.length.addEventListener("input", (e) => {
 		let length;
 		try {
@@ -218,48 +219,50 @@ window.addEventListener("load", () => {
 	update_state(true, true, false)();
 
 	// has to happen after populate
-	for(let model of Object.keys(input.models))
+	for(let model of Object.keys(input.models)) {
 		input.models[model].addEventListener("change", ((model) => () => {
 			state.model = model;
+			input.expand_menu.checked = false;
 			update_state(true, false, true)();
 		})(model));
+	}
 
 	if(!window.localStorage["intro-done"]) {
-		intro()
+		intro();
 	}
 
 	let intro_left_box = document.getElementById("intro-model").getBoundingClientRect();
-	input.intro_left_bound = intro_left_box.x + intro_left_box.right
-	input.intro_autocomplete = document.getElementById("intro-autocomplete")
+	input.intro_left_bound = intro_left_box.x + intro_left_box.right;
+	input.intro_autocomplete = document.getElementById("intro-autocomplete");
 
-	document.getElementById("intro-skip").addEventListener("click", intro_done)
+	document.getElementById("intro-skip").addEventListener("click", intro_done);
 	document.getElementById("intro-next").addEventListener("click", () => {
 		if(document.body.classList.contains("intro-stage-1")) {
 			if(document.body.classList.contains("narrow") &&
 					!document.body.classList.contains("intro-stage-2")) {
-				document.body.classList.add("intro-stage-2")
+				document.body.classList.add("intro-stage-2");
 			} else {
-				intro_done()
+				intro_done();
 			}
 		} else {
-			document.body.classList.add("intro-stage-1")
+			document.body.classList.add("intro-stage-1");
 		}
-	})
+	});
 
-	input.expand_menu = document.getElementById("expand-menu")
+	input.expand_menu = document.getElementById("expand-menu");
 	document.getElementById("help").addEventListener("click", () => {
-		input.expand_menu.checked = false
-		intro()
-	})
+		input.expand_menu.checked = false;
+		intro();
+	});
 
 	let mobile_left_box = header_left.getBoundingClientRect();
-	input.mobile_left_bound = mobile_left_box.x + mobile_left_box.right
-	resize()
+	input.mobile_left_bound = mobile_left_box.x + mobile_left_box.right;
+	resize();
 });
 
 window.addEventListener("popstate", (event) => {
 	state = event.state;
 	populate();
-})
+});
 
 window.addEventListener("resize", resize);
