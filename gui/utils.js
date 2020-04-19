@@ -52,7 +52,7 @@ function from_uid(value) {
 
 function predict(model, query,
 		length=params.default_length, sequences=1, seed=params.default_seed) {
-	let loc = new URL("/" + model + "/predict", document.location);
+	let loc = new URL(model + "/predict", document.location);
 	loc.searchParams.set("p", query);
 	loc.searchParams.set("l", length);
 	loc.searchParams.set("r", sequences);

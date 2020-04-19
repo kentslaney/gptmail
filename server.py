@@ -128,7 +128,7 @@ client_params = {
     "default_model": default_model,
     "api_version": api_version,
     "default_seed": default_seed,
-    "default_length": 500,
+    "default_length": 200,
 }
 
 with open(relpath("gui", "default_prompts"), "r") as fp:
