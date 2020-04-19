@@ -8,9 +8,9 @@
 	</head>
 	<body>
 		<div id="header">
-			<input type="checkbox" id="expand_menu" />
-			<label for="expand_menu"><span class="material-icons">menu</span></label>
-			<div id="header-left"></div>
+			<input type="checkbox" id="expand-menu" />
+			<label for="expand-menu"><span class="material-icons">menu</span></label>
+			<div id="header-left"><span id="help" class="material-icons">help_outline</span></div>
 			<div id="header-right">
 				<div id="run">
 					<span id="run-text">Autocomplete</span>
@@ -23,6 +23,26 @@
 		<div id="input-container">
 			<textarea id="input" placeholder="Enter the prompt you want autocompleted here..."></textarea>
 			<div id="autocomplete-wrapper"><span id="autocomplete-prompt"></span><span id="autocomplete"></span></div>
+		</div>
+		<div id="intro">
+			<div id="intro-main">
+				Welcome to GPTMail's web interface!<br>
+				GPTMail is a system that trains a text machine learning model (<a href="https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf">GPT-2</a>, a type of <a href="https://en.wikipedia.org/wiki/Transformer_(machine_learning_model)">Transformer</a>) on someone's emails, and autocompletes a prompt based on what it thinks that person would say. You can find more info on <a href="https://github.com/kentslaney/gptmail">its GitHub</a>.<br>
+				The main part of this page is just a textbox for the prompt and autocompletion results. The text in bold is the prompt, the part you can edit, and once you autocomplete the prompt, the results will show in normal weight text. An example prompt has been filled in to get you started.
+			</div>
+			<div id="intro-options-wrapper">
+				<div id="intro-options">
+					<div id="intro-skip" class="button">Skip</div><div id="intro-next" class="button">Continue</div>
+				</div>
+			</div>
+		</div>
+		<div id="intro-autocomplete-wrapper">
+			<div id="intro-autocomplete">
+			Click on the "autocomplete" button to start running the machine learning model. This may take a while, and the button will display a loading animation while the server is working. Alter the number in the textbox to the right to change how many words the server writes.
+			</div>
+		</div>
+		<div id="intro-model">
+			If there's more than one machine learning model, you can change which one the server autocompletes with by selecting a different option here.
 		</div>
 	</body>
 </html>

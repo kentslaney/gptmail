@@ -1,6 +1,6 @@
 body {
-  margin: 0px;
-  font-family: Helvetica;
+	margin: 0px;
+	font-family: Helvetica;
 }
 
 #input-container {
@@ -8,25 +8,25 @@ body {
 	width: 100%;
 	top: 3rem;
 	bottom: 0px;
-  font-size: 1.5rem;
-  font-weight: bold;
-  overflow-y: auto;
-  border-top: 1px solid #ccc;
+	font-size: 1.5rem;
+	font-weight: bold;
+	overflow-y: auto;
+	border-top: 1px solid #ccc;
 }
 
 #input {
-  border: 0px;
-  outline: 0px;
-  width: 100%;
-  height: 100%;
-  resize: none;
-  font: inherit;
-  padding: 1rem;
-  background: transparent;
+	border: 0px;
+	outline: 0px;
+	width: 100%;
+	height: 100%;
+	resize: none;
+	font: inherit;
+	padding: 1rem;
+	background: transparent;
 }
 
 #input:placeholder-shown {
-  font-weight: normal;
+	font-weight: normal;
 }
 
 #autocomplete-wrapper {
@@ -35,8 +35,8 @@ body {
 	left: 0;
 	right: 0;
 	z-index: -1;
-  padding: 1rem;
-  white-space: pre-wrap;
+	padding: 1rem;
+	white-space: pre-wrap;
 }
 
 #autocomplete-prompt {
@@ -48,79 +48,79 @@ body {
 }
 
 #header-right {
-  display: inline-block;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+	display: inline-block;
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
 	margin: 0 1rem;
-  white-space: nowrap;
+	white-space: nowrap;
 }
 
-#run {
-  font-size: 1rem;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  background: #42A5F5;
-  border: 1px solid #ccc;
-  color: #333;
-  display: inline;
-  position: relative;
+#run, .button {
+	font-size: 1rem;
+	padding: 0.5rem;
+	border-radius: 0.25rem;
+	background: #42A5F5;
+	border: 1px solid #ccc;
+	color: #333;
+	display: inline-block;
+	position: relative;
 }
 
-#run:not(.loading):not(.disabled) {
-  cursor: pointer;
+#run:not(.loading):not(.disabled), .button {
+	cursor: pointer;
 }
 
 #run.loading, #run.disabled {
 	cursor: default;
 }
 
-#run:hover:not(.loading):not(.disabled) {
-  background: #2196F3;
-  border-color: #aaa;
+#run:hover:not(.loading):not(.disabled), .button:hover {
+	background: #2196F3;
+	border-color: #aaa;
 }
 
 .loading > #run-text {
-  visibility: hidden;
+	visibility: hidden;
 }
 
 #run-loading > span {
-  width: 0.8rem;
-  height: 0.8rem;
-  display: inline-block;
-  margin: 0 0.15rem;
-  border-radius: 100%;
-  background: #333;
-  animation-name: load;
-  animation-duration: 3s;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
-  transform: scale(0);
+	width: 0.8rem;
+	height: 0.8rem;
+	display: inline-block;
+	margin: 0 0.15rem;
+	border-radius: 100%;
+	background: #333;
+	animation-name: load;
+	animation-duration: 3s;
+	animation-iteration-count: infinite;
+	animation-timing-function: ease-in-out;
+	transform: scale(0);
 }
 
 #run:not(.loading) > #run-loading {
-  display: none;
+	display: none;
 }
 
 #run-loading {
-  position: absolute;
-  width: 100%;
-  left: 0;
-  white-space: nowrap;
-  text-align: center;
-  height: 0;
-  top: 50%;
-  margin-top: -0.4rem;
+	position: absolute;
+	width: 100%;
+	left: 0;
+	white-space: nowrap;
+	text-align: center;
+	height: 0;
+	top: 50%;
+	margin-top: -0.4rem;
 }
 
 .loading > #run-loading > span:nth-child(2) { animation-delay: 0.3s; }
 .loading > #run-loading > span:nth-child(3) { animation-delay: 0.6s; }
 
 @keyframes load {
-    0% { transform: scale(0); }
-   50% { transform: scale(1); }
-  100% { transform: scale(0); }
+	  0% { transform: scale(0); }
+	 50% { transform: scale(1); }
+	100% { transform: scale(0); }
 }
 
 #header {
@@ -129,24 +129,24 @@ body {
 }
 
 #run.disabled {
-  color: #666;
-  background: #64B5F6;
+	color: #666;
+	background: #64B5F6;
 }
 
 #length {
-  margin-left: 0.3rem;
-  font-size: 1rem;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  border: 1px solid #ccc;
-  color: #333;
-  width: 4rem;
-  text-align: center;
-  outline: 0px;
+	margin-left: 0.3rem;
+	font-size: 1rem;
+	padding: 0.5rem;
+	border-radius: 0.25rem;
+	border: 1px solid #ccc;
+	color: #333;
+	width: 4rem;
+	text-align: center;
+	outline: 0px;
 }
 
 #length:focus {
-  border-color: #aaa;
+	border-color: #aaa;
 }
 
 #length.invalid {
@@ -158,98 +158,290 @@ body {
 }
 
 #header-left {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  margin-left: 1rem;
-  font-size: 1rem;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	margin-left: 1rem;
+	font-size: 1rem;
 }
 
 #header-left > input[type=radio] {
-  display: none;
-}
-
-#header-left > label {
-  padding: 0.5rem;
-  margin: 0 0.2rem;
-  border-radius: 0.25rem;
-  border: 1px solid #ccc;
-  cursor: pointer;
-}
-
-#header-left > label:hover {
-  border: 1px solid #aaa;
-}
-
-#header-left > input[type=radio]:checked + label {
-  cursor: default;
-	background: #42A5F5;
-  border: 1px solid #aaa;
-}
-
-#expand_menu, #expand_menu + label {
 	display: none;
 }
 
-body.mobile > #header > #expand_menu + label {
-  display: inline-block;
-  position: absolute;
-  z-index: 1;
-  height: 3rem;
-  padding-left: 1rem;
+#header-left > label {
+	padding: 0.5rem;
+	margin: 0 0.2rem;
+	border-radius: 0.25rem;
+	border: 1px solid #ccc;
+	cursor: pointer;
+	display: inline-block;
 }
 
-body.mobile > #header > #expand_menu + label > span {
-  line-height: 3rem;
+#header-left > label:hover {
+	border: 1px solid #aaa;
 }
 
-body.mobile > #header > #expand_menu + label::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  transition: visibility 0s linear 0.2s, background 0.2s;
+#header-left > input[type=radio]:checked + label {
+	cursor: default;
+	background: #42A5F5;
+	border: 1px solid #aaa;
 }
 
-body.mobile > #header > #expand_menu:checked + label::before {
-  background: rgba(0, 0, 0, 0.6);
-  visibility: visible;
-  transition-delay: 0s;
+#expand-menu, #expand-menu + label {
+	display: none;
+}
+
+body.mobile > #header > #expand-menu + label {
+	display: inline-block;
+	position: absolute;
+	z-index: 1;
+	height: 3rem;
+	padding-left: 1rem;
+}
+
+body.mobile > #header > #expand-menu + label > span {
+	line-height: 3rem;
+}
+
+body.mobile > #header > #expand-menu + label::before {
+	content: "";
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0);
+	visibility: hidden;
+	transition: visibility 0s linear 0.2s, background 0.2s;
+}
+
+body.mobile > #header > #expand-menu:checked + label::before {
+	background: rgba(0, 0, 0, 0.6);
+	visibility: visible;
+	transition-delay: 0s;
 }
 
 body.mobile > #header > #header-left {
-  margin: 0;
-  position: fixed;
-  width: 18rem;
-  background: white;
-  height: 100%;
-  transform: translateX(-100%);
-  z-index: 2;
-  top: 0;
+	margin: 0;
+	position: fixed;
+	width: 18rem;
+	max-width: 80vw;
+	background: white;
+	height: 100%;
+	transform: translateX(-100%);
+	z-index: 2;
+	top: 0;
 }
 
-body.mobile.postload > #header > #header-left {
-  transition: transform 0.2s;
+body.mobile.mobile-postload > #header > #header-left {
+	transition: transform 0.2s;
 }
 
-body.mobile > #header > #expand_menu:checked + label + #header-left {
-  transform: translateX(0%);
+body.mobile > #header > #expand-menu:checked + label + #header-left {
+	transform: translateX(0%);
 }
 
 body.mobile #header-left::before {
-    display: block;
-    padding: 1rem 0.5rem;
-    border-bottom: 1px solid #ccc;
-    color: #555;
+	display: block;
+	padding: 1rem 0.5rem;
+	border-bottom: 1px solid #ccc;
+	color: #555;
 }
 
 body.mobile #header-left > label {
-    display: block;
-    margin: 0;
-    border-radius: 0;
-    border-width: 0 0 1 0 !important;
+	display: block;
+	margin: 0;
+	border-radius: 0;
+	border-width: 0 0 1 0 !important;
+}
+
+#intro {
+	position: fixed;
+	z-index: 4;
+	display: none;
+	max-height: 100vh;
+}
+
+body.intro::before {
+	content: "";
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.6);
+	z-index: 3;
+	transition: top 0.2s;
+}
+
+body.intro-stage-1::before {
+	top: 3rem;
+}
+
+#intro-main, #intro-autocomplete, #intro-model {
+	font-size: 1.2rem;
+	background: #fff;
+	border-radius: 0.5rem;
+	padding: 1rem;
+	overflow-y: auto;
+	opacity: 1;
+}
+
+#intro-main, .intro-postload #intro-autocomplete-wrapper, .intro-postload #intro-model {
+	transition: opacity 0.2s;
+}
+
+body.intro #intro {
+	display: flex;
+	width: 80vw;
+	max-width: 48rem;
+	max-height: 90vh;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	flex-direction: column;
+}
+
+body.mobile.intro #intro {
+	width: 90vw;
+}
+
+#intro-main br {
+	margin-top: 2rem;
+	content: "";
+	display: block;
+}
+
+#intro-skip {
+	margin-right: 1rem;
+	background: #aaa;
+}
+
+#intro-skip:hover {
+	background: #888;
+}
+
+#intro-options-wrapper {
+	margin-top: 1rem;
+}
+
+#intro-autocomplete-wrapper, #intro-model {
+	visibility: hidden;
+}
+
+#intro-options {
+	display: inline-block;
+	margin-left: 100%;
+	transform: translateX(-100%);
+	white-space: nowrap;
+	transition: margin-left 0.2s, transform 0.2s;
+}
+
+body.intro-stage-1 #intro-options {
+	margin-left: 50%;
+	transform: translateX(-50%);
+}
+
+body.intro-stage-1 #intro-main {
+	opacity: 0;
+}
+
+body.intro-stage-1:not(.mobile) #intro-skip, body.intro-stage-2 #intro-skip {
+	display: none;
+}
+
+body.intro-stage-1::after {
+	content: "";
+	position: fixed;
+	top: 0;
+	z-index: 3;
+	height: 3rem;
+	width: 100vw;
+}
+
+body.intro #intro-autocomplete-wrapper, body.intro #intro-model {
+	visibility: visible;
+	opacity: 0;
+}
+
+#intro-autocomplete-wrapper {
+	position: fixed;
+	right: 1rem;
+	left: 1rem;
+	overflow: visible;
+	z-index: 3;
+	top:  4.5rem;
+}
+
+#intro-autocomplete {
+	z-index: 3;
+	max-width: 18rem;
+	overflow: visible;
+	float: right;
+}
+
+#intro-autocomplete::before, #intro-model::before {
+	content: "";
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-left: 1rem solid transparent;
+	border-right: 1rem solid transparent;
+	border-bottom: 1rem solid #fff;
+	top: -1rem;
+}
+
+#intro-autocomplete::before {
+	right: 10.1rem;
+}
+
+#intro-model::before {
+	left: 0.3rem;
+	top: -0.9rem;
+	border-left: 1.1rem solid transparent;
+	border-right: 1.1rem solid transparent;
+	border-bottom: 1.1rem solid #fff;
+}
+
+body.intro-stage-1:not(.narrow) #intro-model, body.intro-stage-2 #intro-model {
+	opacity: 1;
+}
+
+#intro-model {
+	position: fixed;
+	right: 1rem;
+	left: 1rem;
+	max-width: 18rem;
+	overflow: visible;
+	z-index: 3;
+	top:  4.5rem;
+}
+
+body.narrow.intro-stage-2 #intro-autocomplete-wrapper {
+	opacity: 0;
+}
+
+body.intro-stage-1 #intro-autocomplete-wrapper {
+	opacity: 1;
+}
+
+body.mobile #intro-model::before {
+	left: 0.15rem;
+}
+body.mobile #intro-model {
+    left: 0.6rem !important;
+}
+
+#help {
+	vertical-align: middle;
+	margin-left: 0.5rem;
+	cursor: pointer;
+}
+
+body.mobile #help {
+	position: absolute;
+	top: 1.5rem;
+	margin-top: -12px;
+	right: 0.5rem;
 }
