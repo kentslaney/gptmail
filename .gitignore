@@ -9,6 +9,7 @@
 /runs
 /weights
 /cache
+nohup.out
 
 # vim
 [._]sw[a-p]
