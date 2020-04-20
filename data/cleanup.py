@@ -68,5 +68,5 @@ if __name__ == "__main__":
         for fname, res in gen():
             for _, pipe in pipeline(stages[i:], True):
                 res = pipe(res)
-            with open(os.path.join(args.output, fname), "wb+") as fp:
-                fp.write(res)
+            with open(os.path.join(args.output, fname), "w+") as fp:
+                fp.write(res.decode("utf-8", errors="ignore"))
