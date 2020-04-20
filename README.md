@@ -38,7 +38,7 @@ $ python data/cleanup.py
 
 This will just remove the extra things in the `.eml` files like the metadata, links, and attached files. To further clean the plaintext before training, you can also add extra steps to the cleaning pipeline using python functions. Functions with no arguments add new data to the pipeline, and have to output a list of tuples containing, in order, the output file name and the contents that should be added at that stage of the pipeline. Functions to process data from a previous step should both take and output bytes. As an example, consider the command
 ```
-$ python data/cleanup.py data.examples.hwtaylor.cleanup.signature data.cleanup.append
+$ python data/cleanup.py data/examples/hwtaylor/cleanup.py:signature data/cleanup.py:append
 ```
 
 This relies on two functions: `signature(text)` in `data/examples/hwtaylor/cleanup.py` and `append()` in `data/cleanup.py`. The pipeline first pulls out the plain text in `data/raw/*.eml`, then starts calling the pipeline functions. Because `signature(text)` takes one argument, each of the messages from the previous phase get passed through that function before going to the next stage. In this case, it removes all the email signatures for hwtaylor emails that it can find. The next pipeline phase is `append()` which takes no arguments, meaning that it adds new data to the pipeline. In this case, it outputs all the filenames and contents of files in `data/add`. This way, all of these files are automatically added to the output `data/clean`. If the functions had been flipped, the text from `add` also would have been searched for email signatures, but without being parsed as `.eml` files.
@@ -68,7 +68,7 @@ Some pretrained models based on sources of potential interest and how they were 
 - [emails of the famed Halston Taylor](https://slaney.org/~kent/hwtaylor.tar.gz)
   - `python data/gmail.py "from:hwtaylor@mit.edu to:(cross-country@mit.edu OR track-field@mit.edu)"`
   - `python data/examples/hwtaylor/articles.py`
-  - `python data/cleanup.py data.examples.hwtaylor.cleanup.signature data.cleanup.append`
+  - `python data/cleanup.py data/examples/hwtaylor/cleanup.py:signature data/cleanup.py:append`
   - `bash train.sh 10`
 
 ## Running the Model

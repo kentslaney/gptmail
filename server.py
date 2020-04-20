@@ -11,9 +11,11 @@ models = {}
 for mname in os.listdir(relpath("weights")):
     mpath = relpath("weights", mname)
 
+    print("loading model {}...".format(mname))
     tokenizer = GPT2Tokenizer.from_pretrained(mpath)
     model = GPT2LMHeadModel.from_pretrained(mpath)
     models[mname] = (tokenizer, model)
+    print("moving model {} to {}...".format(mname, device))
     model.to(device)
 
 default_model, default_seed, api_version = "hwtaylor", 42, 1

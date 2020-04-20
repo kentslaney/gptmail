@@ -23,9 +23,10 @@ def append():
     args, _ = parser.parse_known_args()
 
     res = []
-    for append in args.append for fname in os.listdir(append)
-        with open(os.path.join(append, fname), "rb") as fp:
-            res.append((fname, fp.read()))
+    for append in args.append:
+        for fname in os.listdir(append):
+            with open(os.path.join(append, fname), "rb") as fp:
+                res.append((fname, fp.read()))
     return res
 
 if __name__ == "__main__":
@@ -52,8 +53,11 @@ if __name__ == "__main__":
         filter(lambda x: x[1][1] == value, enumerate(stages)))
 
     for stage in args.stages:
-        module, fname = stage.rsplit('.', 1)
-        fn = getattr(importlib.import_module(module), fname)
+        mpath, fname = stage.rsplit(":", 1)
+        spec = importlib.util.spec_from_file_location(os.path.basename(mpath).rstrip(".py"), mpath)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        fn = getattr(module, fname)
         stages.append((fn, bool(inspect.getfullargspec(fn).args)))
 
     if args.overwrite:

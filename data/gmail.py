@@ -1,4 +1,4 @@
-import pickle, os, base64
+import pickle, os, base64, email, email.message, email.policy
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -12,18 +12,18 @@ def service(credentials="credentials.json"):
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
     # time.
-    if os.path.exists("token.pickle"):
-        with open("token.pickle", "rb") as token:
+    if os.path.exists(relpath("token.pickle")):
+        with open(relpath("token.pickle"), "rb") as token:
             creds = pickle.load(token)
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file("credentials.json", SCOPES)
+            flow = InstalledAppFlow.from_client_secrets_file(credentials, SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
-        with open("token.pickle", "wb") as token:
+        with open(relpath("token.pickle"), "wb") as token:
             pickle.dump(creds, token)
 
     return build("gmail", "v1", credentials=creds)
@@ -55,13 +55,21 @@ def get(service, msg_id, user_id="me", output="raw"):
     except errors.HttpError as error:
         print("An error occurred: {}".format(error))
 
+def detach(emlbytes):
+    msg = email.message_from_bytes(emlbytes,
+        _class=email.message.EmailMessage, policy=email.policy.default)
+    for part in msg.walk():
+        if part.get_content_maintype() not in ("multipart", "text"):
+            part.clear()
+    return msg.as_bytes()
+
 def download(service, query, user_id="me", output="raw", offset=0):
     for res in tqdm(search(service, query, user_id)[offset:]):
         with open(os.path.join(output, res["id"] + ".eml"), "wb+") as fp:
-            fp.write(get(service, res["id"], user_id))
+            fp.write(detach(get(service, res["id"], user_id)))
 
 if __name__ == "__main__":
-    import argparse
+    import argparse, shutil
     relpath = lambda *args: os.path.join(os.path.dirname(os.path.abspath(__file__)), *args)
     parser = argparse.ArgumentParser(description="Download gmail search results")
     parser.add_argument("--output", default=relpath("raw"))
