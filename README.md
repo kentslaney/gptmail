@@ -48,6 +48,8 @@ Like `data/gmail.py`, you can find additional flags with the command
 python data/cleanup.py --help
 ```
 
+The write at the end of the pipeline ignores any bytes that can't be decoded as UTF-8, so any encoding fixes that need to happen should be part of the pipeline.
+
 ## Generating Weights
 ### Training
 To train a model based on the data in `data/clean` for a given number of epochs (`10` here), run

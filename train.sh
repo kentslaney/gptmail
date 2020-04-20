@@ -17,4 +17,5 @@ python transformers/examples/run_language_modeling.py \
 	--do_train \
 	--train_data_file=data/all \
 	--save_steps 5000 \
-	--num_train_epochs="${1-10}"
+	--num_train_epochs="${1-10}" \
+	"$@"
