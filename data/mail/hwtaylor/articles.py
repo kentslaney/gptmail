@@ -11,7 +11,8 @@ index_urls = [
 
 def scrape_index(url):
     res = urllib.request.urlopen(url).read()
-    urls = [[j.decode('utf-8') for j in i.groups()] for i in article_urls.finditer(res)]
+    urls = [[j.decode('utf-8') for j in i.groups()]
+            for i in article_urls.finditer(res)]
     return [(urllib.parse.urljoin(url, rel), ext) for rel, ext in urls]
 
 def scrape_article(url, article_type):
@@ -24,11 +25,13 @@ def scrape_article(url, article_type):
 
 if __name__ == "__main__":
     import os, argparse, shutil
-    relpath = lambda *args: os.path.join(os.path.dirname(os.path.abspath(__file__)), *args)
+    relpath = lambda *args: os.path.join(os.path.dirname(
+        os.path.abspath(__file__)), *args)
     parser = argparse.ArgumentParser(description="clean up eml files")
     parser.add_argument("--output", default=relpath("..", "..", "add"))
     group = parser.add_mutually_exclusive_group(required=False)
-    group.add_argument("--no-overwrite", dest="overwrite", action="store_false")
+    group.add_argument(
+        "--no-overwrite", dest="overwrite", action="store_false")
     group.add_argument("--overwrite", dest="overwrite", action="store_true")
     parser.set_defaults(overwrite=True)
     args = parser.parse_args()
@@ -39,5 +42,6 @@ if __name__ == "__main__":
 
     urls = sum((scrape_index(i) for i in index_urls), [])
     for i, (url, article_type) in enumerate(tqdm(urls)):
-        with open(os.path.join(args.output, "article{}".format(i)), "w+") as fp:
+        with open(os.path.join(
+                args.output, "article{}".format(i)), "w+") as fp:
             fp.write(scrape_article(url, article_type))

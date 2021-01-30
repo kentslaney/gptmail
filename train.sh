@@ -3,7 +3,7 @@ cd "$(dirname "$0")"
 bash setup.sh
 
 # clean data
-cat data/clean/* | tr -d '\r' > data/all
+find "{$2-data/clean}" -type f | xargs cat | tr -d '\r' > data/all
 
 # create weights directory
 mkdir -p weights

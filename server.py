@@ -3,8 +3,10 @@ from transformers import GPT2LMHeadModel, GPT2Tokenizer
 from flask import Flask, abort, request, render_template
 from werkzeug.routing import BaseConverter
 
-relpath = lambda *args: os.path.join(os.path.dirname(os.path.realpath(__file__)), *args)
-app = Flask(__name__, static_folder=relpath("gui"), template_folder=relpath("gui"))
+relpath = lambda *args: os.path.join(
+    os.path.dirname(os.path.realpath(__file__)), *args)
+app = Flask(
+    __name__, static_folder=relpath("gui"), template_folder=relpath("gui"))
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 models = {}
@@ -36,7 +38,8 @@ def set_seed(seed):
 repetition_penalty, temperature, top_k, top_p = 1.0, 1.0, 0, 0.9
 
 def run(tokenizer, model, prompt, length, sequences):
-    encoded_prompt = tokenizer.encode(prompt, add_special_tokens=False, return_tensors="pt")
+    encoded_prompt = tokenizer.encode(
+        prompt, add_special_tokens=False, return_tensors="pt")
     encoded_prompt = encoded_prompt.to(device)
 
     output_sequences = model.generate(
@@ -55,8 +58,10 @@ def run(tokenizer, model, prompt, length, sequences):
 
     generated = []
     for sequence in output_sequences:
-        text = tokenizer.decode(sequence.tolist(), clean_up_tokenization_spaces=True)
-        translated = tokenizer.decode(encoded_prompt[0], clean_up_tokenization_spaces=True)
+        text = tokenizer.decode(
+            sequence.tolist(), clean_up_tokenization_spaces=True)
+        translated = tokenizer.decode(
+            encoded_prompt[0], clean_up_tokenization_spaces=True)
         generated.append(prompt + text[len(translated):])
 
     return generated
@@ -80,16 +85,20 @@ def translate(value, inalphabet, outalphabet):
 
 uid = "23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz"
 digits = "/0123456789"
-common = list(map(chr, [9, 10, 13] + list(range(32, 47)) + list(range(48, 127)) + [47]))
-assert not any(c == '/' or c not in common for mname in models.keys() for c in mname)
+common = list(map(
+    chr, [9, 10, 13] + list(range(32, 47)) + list(range(48, 127)) + [47]))
+assert not any(
+    c == '/' or c not in common for mname in models.keys() for c in mname)
 
 def to_uid(model, prompt, length, sequences, seed):
-    return translate(translate("{}/{}/{}/{}".format(api_version, length, sequences, seed),
-            digits, common[:-1]) + "/{}/{}".format(model, prompt), common, uid)
+    return translate(translate(
+        "{}/{}/{}/{}".format(api_version, length, sequences, seed),
+        digits, common[:-1]) + "/{}/{}".format(model, prompt), common, uid)
 
 def from_uid(value):
     payload = translate(value, uid, common).split("/", 2)
-    config = list(map(int, translate(payload[0], common[:-1], digits).split("/")))
+    config = list(map(
+        int, translate(payload[0], common[:-1], digits).split("/")))
 
     return {
         "model": payload[1], "prompt": payload[2],
@@ -100,7 +109,8 @@ def from_uid(value):
 @app.route("/<model:mname>/predict")
 def predict(mname):
     prompt, length = request.args.get("p", None), request.args.get("l", None)
-    sequences, seed = request.args.get("r", 1), request.args.get("s", default_seed)
+    sequences, seed = request.args.get("r", 1), \
+        request.args.get("s", default_seed)
 
     if prompt is None or prompt == "" or length is None:
         abort(400)
