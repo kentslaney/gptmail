@@ -2,7 +2,7 @@
 I am currently modifying this repo to analyze r/wallstreetbets and discover what
 topics are being pushed by humans versus bots based on the text perplexity. I've
 pushed initial repo cleanup, which makes life easier, but also means this README
-is out of date. Sorry for the inconvience (to all 1 people who have starred this
+is out of date. Sorry for the inconvience (to all 2 people who have starred this
 repo, plus any Facebook peeps who actually followed the link to my github).
 
 Want to automate a friend? Just download their emails and let GPT-2 do the rest!
