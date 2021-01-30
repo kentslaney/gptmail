@@ -4,12 +4,12 @@
 /data/clean
 /data/all
 /data/gpt2_cached*
-/data/credentials.json
 /data/token.pickle
 /runs
 /weights
 /cache
 nohup.out
+credentials.json
 
 # vim
 [._]sw[a-p]
