@@ -119,6 +119,8 @@ made:
   - `python data/cleanup.py data/examples/hwtaylor/cleanup.py:signature data/cleanup.py:append`
   - `bash train.sh 10`
 
+(it's a roundabout way of getting to the point)
+
 ## Running the Model
 ### In the Command Line
 Running the model based on `weights/default` requires a `length` parameter (1000
